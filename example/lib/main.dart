@@ -34,13 +34,13 @@ class TestPage extends StatelessWidget {
             fontSize: 24,
             fontWeight: FontWeight.w900,
           ),
-          icon: const NeoIcon(
+          icon: const NeoIconButton(
             icon: Icon(
               Icons.help,
               color: Colors.black,
             ),
           ),
-          field: const NeoField(),
+          field: const NeoTextField(),
           card: NeoCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

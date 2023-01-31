@@ -5,11 +5,11 @@ import 'neo_text.dart';
 
 class NeoButton extends StatelessWidget {
   const NeoButton(
-      this.value, {
-        Key? key,
-        this.allCaps = true,
-        this.width,
-      }) : super(key: key);
+    this.value, {
+    Key? key,
+    this.allCaps = true,
+    this.width,
+  }) : super(key: key);
 
   final String value;
   final bool allCaps;
@@ -19,13 +19,11 @@ class NeoButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return NeoBorderContainer(
       width: width,
-      hasHardShadow: true,
       child: ElevatedButton(
         onPressed: () => {},
-        style: ButtonStyle(
-          shadowColor: MaterialStateProperty.all(Colors.red),
+        child: NeoText(
+          allCaps ? value.toUpperCase() : value,
         ),
-        child: NeoText(allCaps ? value.toUpperCase() : value),
       ),
     );
   }

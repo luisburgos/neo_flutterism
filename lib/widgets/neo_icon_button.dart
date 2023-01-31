@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'neo_border_container.dart';
 
 // https://stackoverflow.com/a/57237866
-class NeoIcon extends StatelessWidget {
-  const NeoIcon({
+class NeoIconButton extends StatelessWidget {
+  const NeoIconButton({
     Key? key,
     required this.icon,
   }) : super(key: key);

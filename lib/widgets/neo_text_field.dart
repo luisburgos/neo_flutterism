@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'neo_border_container.dart';
 
-class NeoField extends StatelessWidget {
-  const NeoField({
+class NeoTextField extends StatelessWidget {
+  const NeoTextField({
     Key? key,
   }) : super(key: key);
 

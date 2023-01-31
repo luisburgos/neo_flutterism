@@ -14,6 +14,10 @@ ThemeData neoThemeData() => ThemeData(
       textStyle: GoogleFonts.plusJakartaSans(
         color: Colors.black,
       ),
+      side: const BorderSide(
+        width: 2,
+        color: Colors.black,
+      ),
     ),
   ),
 );

@@ -6,9 +6,11 @@ class NeoCard extends StatelessWidget {
   const NeoCard({
     Key? key,
     required this.child,
+    this.onTap,
   }) : super(key: key);
 
   final Widget child;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class NeoCard extends StatelessWidget {
           ),
         ),
         child: InkWell(
-          onTap: () {},
+          onTap: onTap,
           child: Container(
             decoration: const BoxDecoration(
               border: Border(

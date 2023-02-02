@@ -19,6 +19,7 @@ class NeoButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return NeoBorderContainer(
       width: width,
+      hasHardShadow: true,
       child: ElevatedButton(
         onPressed: () => {},
         child: NeoText(

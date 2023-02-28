@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/luisburgos/neo_flutterism/compare/0.2.0...0.2.1) (2023-02-28)
+
+
+### Bug Fixes
+
+* conflicted readme ([6444317](https://github.com/luisburgos/neo_flutterism/commit/6444317a2249eb1b3042f2b00fb451344408b332))
+
+
+
 # [0.2.0](https://github.com/luisburgos/neo_flutterism/compare/0.1.0...0.2.0) (2023-02-28)
 
 

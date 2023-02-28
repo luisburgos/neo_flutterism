@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:neo_flutterism/neo_flutterism.dart';
-import 'package:neo_flutterism/widgets/neo_text_button.dart';
+
+import 'pages/expenses_tracker_page.dart';
+import 'pages/personal_site_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,121 +19,98 @@ class MyApp extends StatelessWidget {
       title: 'Neobrutalism Test',
       debugShowCheckedModeBanner: false,
       theme: neoThemeData(),
-      home: const TestPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (_) => _HomePage(
+              items: [
+                _HomeItem(
+                  'Personal Site',
+                  route: '/personal-site',
+                ),
+                _HomeItem(
+                  'Expenses Tracker',
+                  route: '/expenses-tracker',
+                ),
+              ],
+            ),
+        '/personal-site': (_) => const PersonalSitePage(),
+        '/expenses-tracker': (_) => const ExpensesTrackerPage(),
+      },
     );
   }
 }
 
-class TestPage extends StatelessWidget {
-  const TestPage({Key? key}) : super(key: key);
+class _HomeItem {
+  final String name;
+  final String route;
+
+  _HomeItem(
+    this.name, {
+    required this.route,
+  });
+}
+
+class _HomePage extends StatelessWidget {
+  const _HomePage({
+    Key? key,
+    required this.items,
+  }) : super(key: key);
+
+  final List<_HomeItem> items;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: _TestPageTemplate(
-          label: const NeoText(
-            "Hi, I'm Luis Burgos",
-            fontSize: 24,
-            fontWeight: FontWeight.w900,
-          ),
-          icon: const NeoIconButton(
-            icon: Icon(
-              Icons.help,
-              color: Colors.black,
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: Text(
+              'Examples',
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 24,
+              ),
             ),
           ),
-          field: const NeoTextField(),
-          card: NeoCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.network(
-                  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-                  fit: BoxFit.cover,
-                  height: 140,
-                  width: 250,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      NeoText(
-                        'This is a title',
-                        fontSize: 20,
-                      ),
-                      SizedBox(height: 6),
-                      NeoText(
-                        'This is a subtitle',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+          const Divider(thickness: 2),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return _HomeListTile(
+                data: items[index],
+              );
+            },
           ),
-          button: const NeoButton(
-            'Click me',
-            width: 200,
-          ),
-        ),
+        ],
       ),
     );
   }
 }
 
-class _TestPageTemplate extends StatelessWidget {
-  const _TestPageTemplate({
+class _HomeListTile extends StatelessWidget {
+  const _HomeListTile({
     Key? key,
-    required this.label,
-    required this.icon,
-    required this.field,
-    required this.card,
-    required this.button,
+    required this.data,
   }) : super(key: key);
 
-  final Widget label;
-  final Widget icon;
-  final Widget field;
-  final Widget card;
-  final Widget button;
+  final _HomeItem data;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Row(
-            children: [
-              label,
-              const Spacer(),
-              icon,
-            ],
-          ),
+    return ListTile(
+      title: Text(
+        data.name,
+        style: const TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 20,
         ),
-        Expanded(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: field,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: card,
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: button,
-        ),
-      ],
+      ),
+      onTap: () {
+        Navigator.of(context).pushNamed(data.route);
+      },
     );
   }
 }

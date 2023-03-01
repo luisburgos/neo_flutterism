@@ -1,3 +1,4 @@
+import 'package:example/pages/app_with_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:neo_flutterism/neo_flutterism.dart';
 
@@ -5,7 +6,7 @@ import 'pages/expenses_tracker_page.dart';
 import 'pages/personal_site_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const GetApp());
 }
 
 //FIXME: Weird white space at the joints of container borders.
@@ -19,22 +20,22 @@ class MyApp extends StatelessWidget {
       title: 'Neobrutalism Test',
       debugShowCheckedModeBanner: false,
       theme: neoThemeData(),
-      initialRoute: '/',
+      initialRoute: _HomePage.route,
       routes: {
-        '/': (_) => _HomePage(
+        _HomePage.route: (_) => _HomePage(
               items: [
                 _HomeItem(
                   'Personal Site',
-                  route: '/personal-site',
+                  route: PersonalSitePage.route,
                 ),
                 _HomeItem(
                   'Expenses Tracker',
-                  route: '/expenses-tracker',
+                  route: ExpensesTrackerPage.route,
                 ),
               ],
             ),
-        '/personal-site': (_) => const PersonalSitePage(),
-        '/expenses-tracker': (_) => const ExpensesTrackerPage(),
+        PersonalSitePage.route: (_) => const PersonalSitePage(),
+        ExpensesTrackerPage.route: (_) => const ExpensesTrackerPage(),
       },
     );
   }
@@ -51,6 +52,8 @@ class _HomeItem {
 }
 
 class _HomePage extends StatelessWidget {
+  static const String route = '/';
+
   const _HomePage({
     Key? key,
     required this.items,

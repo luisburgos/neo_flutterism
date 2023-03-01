@@ -7,9 +7,11 @@ class NeoIconButton extends StatelessWidget {
   const NeoIconButton({
     Key? key,
     required this.icon,
+    this.onPressed,
   }) : super(key: key);
 
   final Widget icon;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class NeoIconButton extends StatelessWidget {
       hasHardShadow: true,
       child: ElevatedButton(
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        onPressed: () => {},
+        onPressed: onPressed,
         style: ButtonStyle(
           shape: MaterialStateProperty.all(const RoundedRectangleBorder()),
           padding: MaterialStateProperty.all(const EdgeInsets.all(0)),

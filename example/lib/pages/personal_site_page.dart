@@ -5,6 +5,8 @@ import 'package:neo_flutterism/neo_flutterism.dart';
 import '../widgets/page_template.dart';
 
 class PersonalSitePage extends StatelessWidget {
+  static const String route = '/personal-site';
+
   const PersonalSitePage({Key? key}) : super(key: key);
 
   @override

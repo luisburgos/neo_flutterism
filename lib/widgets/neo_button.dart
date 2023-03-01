@@ -4,22 +4,24 @@ import 'neo_border_container.dart';
 import 'neo_text.dart';
 
 class NeoButton extends StatelessWidget {
-  const NeoButton(
-    this.value, {
+  const NeoButton({
     Key? key,
+    this.value,
     this.allCaps = true,
     this.width,
     this.onPressed,
     this.backgroundColor,
     this.padding,
+    this.child,
   }) : super(key: key);
 
-  final String value;
+  final String? value;
   final bool allCaps;
   final double? width;
   final Function()? onPressed;
   final Color? backgroundColor;
   final EdgeInsetsGeometry? padding;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +47,11 @@ class NeoButton extends StatelessWidget {
                 vertical: 8.0,
                 horizontal: 12,
               ),
-          child: NeoText(
-            allCaps ? value.toUpperCase() : value,
-          ),
+          child: (child != null && value == null)
+              ? child
+              : NeoText(
+                  allCaps ? value!.toUpperCase() : value!,
+                ),
         ),
       ),
     );

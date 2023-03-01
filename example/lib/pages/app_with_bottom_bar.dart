@@ -44,14 +44,20 @@ class GetApp extends StatelessWidget {
               BottomNavBarItem(
                 index: 0,
                 iconData: Icons.list,
+                activeColor: Colors.blue,
+                overlayColor: Colors.blue.shade100,
               ),
               BottomNavBarItem(
                 index: 1,
                 iconData: Icons.flash_on_sharp,
+                activeColor: Colors.green,
+                overlayColor: Colors.green.shade100,
               ),
               BottomNavBarItem(
                 index: 2,
                 iconData: Icons.person,
+                activeColor: Colors.red,
+                overlayColor: Colors.red.shade100,
               ),
             ],
           ),
@@ -190,19 +196,19 @@ class NavigationControls extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             NeoButton(
-              'Go to A',
+              value: 'Go to A',
               onPressed: () => setIndex(0),
               backgroundColor: mainColor,
             ),
             const SizedBox(width: 20),
             NeoButton(
-              'Go to B',
+              value: 'Go to B',
               onPressed: () => setIndex(1),
               backgroundColor: mainColor,
             ),
             const SizedBox(width: 20),
             NeoButton(
-              'Go to C',
+              value: 'Go to C',
               onPressed: () => setIndex(2),
               backgroundColor: mainColor,
             ),
@@ -274,19 +280,23 @@ class CustomBottomBar extends StatelessWidget {
     return Obx(() {
       final bottomNavBar = controller.bottomNavBar();
       return CustomBottomAppBar(
-        items: bottomNavBar.items
-            .map(
-              (data) => NeoIconButton(
-                icon: Icon(
-                  data.iconData,
-                  color: bottomNavBar.currentIndex == data.index
-                      ? activeColor
-                      : inactiveColor,
-                ),
-                onPressed: () => controller.setIndex(data.index),
+        items: bottomNavBar.items.map(
+          (data) {
+            final isSelected = bottomNavBar.currentIndex == data.index;
+            return NeoIconButton(
+              hasHardShadow: isSelected,
+              icon: Icon(
+                data.iconData,
+                color: isSelected
+                    ? data.activeColor ?? activeColor
+                    : inactiveColor,
               ),
-            )
-            .toList(),
+              backgroundColor: Colors.white,
+              overlayColor: data.overlayColor,
+              onPressed: () => controller.setIndex(data.index),
+            );
+          },
+        ).toList(),
       );
     });
   }
@@ -327,9 +337,13 @@ class BottomNavBarItem {
   BottomNavBarItem({
     required this.index,
     required this.iconData,
+    this.activeColor,
+    this.overlayColor,
   });
   final int index;
   final IconData iconData;
+  final Color? activeColor;
+  final Color? overlayColor;
 }
 
 class BottomNavBar {

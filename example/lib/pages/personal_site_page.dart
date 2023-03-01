@@ -58,7 +58,7 @@ class PersonalSitePage extends StatelessWidget {
             ),
           ),
           button: const NeoButton(
-            'Click me',
+            value: 'Click me',
             width: 200,
           ),
         ),
